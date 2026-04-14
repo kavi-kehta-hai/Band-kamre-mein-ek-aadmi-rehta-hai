@@ -57,7 +57,6 @@
     50% { transform:scale(1.03); opacity:1; }
   }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display:flex;
@@ -70,14 +69,6 @@
     z-index:1;
   }
 
-  .hero::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background: radial-gradient(circle at 50% 35%, rgba(240,200,122,0.10) 0%, transparent 55%);
-    pointer-events:none;
-  }
-
   .cover-wrap {
     position:relative;
     width:min(300px, 76vw);
@@ -85,622 +76,95 @@
     animation: floatUp 0.9s ease both;
   }
 
-  .cover-wrap::before {
-    content:'';
-    position:absolute;
-    inset:-14px;
-    border-radius:20px;
-    background: radial-gradient(circle at center, rgba(240,200,122,0.26), transparent 68%);
-    filter: blur(10px);
-    animation: glowPulse 3.8s ease-in-out infinite;
-  }
-
   .cover-img {
     width:100%;
-    display:block;
-    position:relative;
-    z-index:1;
     border-radius:18px;
-    box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,0.08);
-  }
-
-  .title-block {
-    max-width: 760px;
-    animation: floatUp 0.9s 0.08s ease both;
+    box-shadow: var(--shadow);
   }
 
   .book-title {
     font-size: clamp(30px, 6.2vw, 58px);
-    line-height:1.18;
+    color: var(--gold);
     font-weight:800;
-    letter-spacing:0.02em;
-    color: var(--gold);
-    text-wrap: balance;
-    text-shadow: 0 8px 28px rgba(0,0,0,0.35);
   }
 
-  .ornament {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    margin: 18px auto 16px;
-    opacity:0.95;
-  }
-
-  .ornament::before,
-  .ornament::after {
-    content:'';
-    width:72px;
-    height:1px;
-    background: linear-gradient(90deg, transparent, rgba(240,200,122,0.95), transparent);
-  }
-
-  .ornament span {
-    color: var(--gold);
-    font-size: 12px;
-    letter-spacing: 0.2em;
-  }
-
-  .author {
-    font-size: 15px;
-    color: var(--grey);
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
-
-  .free-badge {
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-top: 8px;
-    padding: 7px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(240,200,122,0.24);
-    background: rgba(255,255,255,0.03);
-    color: var(--gold);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    backdrop-filter: blur(10px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-  }
+  .author { color: var(--grey); margin-top:10px; }
 
   .buttons {
+    margin-top: 30px;
     display:flex;
     flex-direction:column;
-    gap: 12px;
-    width: min(360px, 92vw);
-    margin-top: 34px;
-    animation: floatUp 0.9s 0.16s ease both;
+    gap:12px;
   }
 
   .btn {
-    display:block;
-    width:100%;
-    padding: 15px 22px;
-    border-radius: 16px;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 700;
+    padding:15px;
+    border-radius:16px;
     text-decoration:none;
-    text-align:center;
-    cursor:pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-    border: 1px solid transparent;
-    letter-spacing: 0.02em;
-    backdrop-filter: blur(10px);
+    font-weight:700;
   }
-
-  .btn:hover { transform: translateY(-2px); }
 
   .btn-primary {
-    color: #10111a;
-    background: linear-gradient(135deg, #f0c87a 0%, #c98f2d 55%, #f4d28f 100%);
-    box-shadow: 0 14px 28px rgba(201,143,45,0.22);
-  }
-
-  .btn-primary:hover {
-    box-shadow: 0 18px 34px rgba(201,143,45,0.30);
+    background: linear-gradient(135deg, #f0c87a, #c98f2d);
+    color:black;
   }
 
   .btn-secondary {
-    color: var(--gold);
-    background: rgba(255,255,255,0.03);
-    border-color: rgba(240,200,122,0.22);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    border:1px solid var(--gold);
+    color:var(--gold);
   }
 
-  .btn-secondary:hover {
-    background: rgba(240,200,122,0.06);
-    border-color: rgba(240,200,122,0.40);
-  }
-
-  /* QUOTE */
-  .quote-section {
-    padding: 72px 22px 54px;
-    max-width: 760px;
-    margin: 0 auto;
-    text-align:center;
-    position:relative;
-    z-index:1;
-  }
-
-  .quote {
-    position:relative;
-    display:inline-block;
-    font-size: clamp(15px, 3.8vw, 19px);
-    line-height: 2.05;
-    color: var(--grey);
-    padding: 28px 18px;
-    border-radius: 24px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
-    border: 1px solid var(--rule);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-  }
-
-  .quote::before {
-    content:'“';
-    position:absolute;
-    top:-28px;
-    left:18px;
-    font-family:'Playfair Display', serif;
-    font-size: 96px;
-    line-height:1;
-    color: rgba(240,200,122,0.14);
-  }
-
-  .quote-line {
-    display:block;
-  }
-
-  .quote-line.highlight {
-    color: var(--white);
-    font-weight: 700;
-  }
-
-  /* ABOUT */
-  .about {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 52px 22px;
-    position:relative;
-    z-index:1;
-  }
-
-  .about-card {
-    padding: 34px 22px;
-    border-radius: 26px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-    border: 1px solid var(--rule);
-    box-shadow: var(--shadow);
-    text-align:center;
-    backdrop-filter: blur(12px);
-  }
-
-  .about h2,
-  .sections h2,
-  .reviews h2 {
-    font-size: 18px;
-    color: var(--gold);
-    margin-bottom: 18px;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-  }
-
-  .about p {
-    font-size: 14px;
-    line-height: 2;
-    color: var(--grey);
-    max-width: 620px;
-    margin: 0 auto 18px;
-  }
-
-  .tags {
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin-top: 18px;
-  }
-
-  .tag {
-    padding: 7px 14px;
-    border-radius:999px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.03);
-    color: var(--dim);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-  }
-
-  /* SECTIONS */
   .sections {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 22px 22px 74px;
-    position:relative;
-    z-index:1;
-  }
-
-  .sections-card {
-    padding: 34px 22px;
-    border-radius: 26px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018));
-    border: 1px solid var(--rule);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(12px);
-  }
-
-  .section-list {
-    display:grid;
-    gap: 14px;
-    margin-top: 26px;
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
   }
 
   .section-item {
-    display:flex;
-    align-items:flex-start;
-    gap:16px;
-    padding: 18px 16px;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.06);
-    transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
-  }
-
-  .section-item:hover {
-    transform: translateY(-2px);
-    border-color: rgba(240,200,122,0.20);
-    background: rgba(240,200,122,0.04);
+    padding:15px 0;
+    border-bottom:1px solid var(--rule);
   }
 
   .sec-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    line-height: 1;
-    color: rgba(240,200,122,0.38);
-    min-width: 34px;
-    margin-top: 1px;
-  }
-
-  .sec-info h3 {
-    font-size: 15px;
-    color: var(--white);
-    margin-bottom: 5px;
-  }
-
-  .sec-info p {
-    font-size: 12px;
-    color: var(--dim);
-    line-height: 1.7;
-  }
-
-  /* REVIEWS */
-  .reviews {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 22px 74px;
-    position:relative;
-    z-index:1;
-  }
-
-  .reviews-card {
-    padding: 34px 22px;
-    border-radius: 26px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018));
-    border: 1px solid var(--rule);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(12px);
-  }
-
-  .review-form {
-    display:grid;
-    gap: 12px;
-    margin-top: 18px;
-  }
-
-  .review-form input,
-  .review-form textarea {
-    width: 100%;
-    padding: 13px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.03);
-    color: var(--white);
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
-  }
-
-  .review-form input::placeholder,
-  .review-form textarea::placeholder {
-    color: rgba(183,184,204,0.62);
-  }
-
-  .review-form input:focus,
-  .review-form textarea:focus {
-    border-color: rgba(240,200,122,0.35);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .review-form button {
-    padding: 14px 18px;
-    border-radius: 14px;
-    border: 0;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 15px;
-    color: #10111a;
-    background: linear-gradient(135deg, #f0c87a 0%, #c98f2d 55%, #f4d28f 100%);
-    box-shadow: 0 14px 28px rgba(201,143,45,0.22);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .review-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 34px rgba(201,143,45,0.30);
-  }
-
-  .review-list {
-    display:grid;
-    gap: 12px;
-    margin-top: 22px;
-  }
-
-  .review-item {
-    padding: 16px 16px 14px;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .review-top {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom: 10px;
-  }
-
-  .review-name {
-    font-size: 14px;
     color: var(--gold);
-    font-weight: 700;
+    font-weight:bold;
   }
 
-  .review-date {
-    font-size: 11px;
-    color: var(--dim);
-    white-space: nowrap;
-  }
-
-  .review-text {
-    font-size: 13px;
-    line-height: 1.8;
-    color: var(--grey);
-    white-space: pre-wrap;
-  }
-
-  .empty-state {
-    font-size: 13px;
-    color: var(--dim);
-    text-align: center;
-    padding: 14px 8px 4px;
-  }
-
-  /* FOOTER */
   footer {
     text-align:center;
-    padding: 32px 22px 44px;
-    border-top: 1px solid var(--rule);
-    position:relative;
-    z-index:1;
-  }
-
-  footer p {
-    font-size: 12px;
-    color: var(--dim);
-    line-height: 2;
-  }
-
-  footer .gold { color: var(--gold); }
-
-  @media (max-width: 640px) {
-    .hero { padding-top: 34px; }
-    .cover-wrap { width:min(260px, 72vw); }
-    .about-card, .sections-card, .reviews-card { padding: 28px 16px; }
-    .section-item { padding: 16px 14px; }
-    .ornament::before, .ornament::after { width: 52px; }
-    .review-top { flex-direction: column; align-items:flex-start; gap:6px; }
+    padding:40px;
+    border-top:1px solid var(--rule);
   }
 </style>
 </head>
+
 <body>
 
 <section class="hero">
   <div class="cover-wrap">
-    <img src="cover.jpg" alt="बंद कमरे में एक आदमी रहता है" class="cover-img" onerror="this.style.display='none'">
+    <img src="cover.jpg" class="cover-img">
   </div>
 
-  <div class="title-block">
-    <h1 class="book-title">बंद कमरे में<br>एक आदमी रहता है</h1>
-    <div class="ornament"><span>✦</span></div>
-    <p class="author">कवि कहता है</p>
-    <span class="free-badge">FREE TO READ · बिल्कुल मुफ़्त</span>
-  </div>
+  <h1 class="book-title">बंद कमरे में एक आदमी रहता है</h1>
+  <p class="author">कवि कहता है</p>
 
   <div class="buttons">
-    <a href="band_kamra_v5.pdf" target="_blank" class="btn btn-primary">
-      📖 अभी पढ़ें — Read Now
-    </a>
-    <a href="band_kamra_v5.pdf" download class="btn btn-secondary">
-      ⬇ PDF Download करें
-    </a>
-  </div>
-</section>
-
-<section class="quote-section">
-  <p class="quote">
-    <span class="quote-line highlight">मैं बाहर से हँसता, भीतर से टूटा हूँ,</span>
-    <span class="quote-line">हर भीड़ में होकर भी अकेला छूटा हूँ,</span>
-    <span class="quote-line">जो देखते हैं वो समझते नहीं कुछ भी —</span>
-    <span class="quote-line highlight">मैं खुद अपनी नज़रों में झूठा हूँ।</span>
-  </p>
-</section>
-
-<section class="about">
-  <div class="about-card">
-    <h2>इस किताब के बारे में</h2>
-    <p>
-      यह कविता संग्रह उन सभी के लिए है जो बंद कमरे में रहते हैं और बाहर से ठीक दिखते हैं।
-      19 कविताएँ — जो वो बातें कहती हैं जो हम कह नहीं पाते।
-    </p>
-    <p>
-      यह किताब बिकती नहीं — बस उन तक पहुँचती है जिन्हें इन शब्दों की ज़रूरत है।
-    </p>
-    <div class="tags">
-      <span class="tag">#हिंदीकविता</span>
-      <span class="tag">#Poetry</span>
-      <span class="tag">#Free Book</span>
-      <span class="tag">#Emotions</span>
-      <span class="tag">#कवि कहता है</span>
-    </div>
+    <a href="band_kamra_v5.pdf" class="btn btn-primary">📖 Read</a>
+    <a href="band_kamra_v5.pdf" download class="btn btn-secondary">⬇ Download</a>
   </div>
 </section>
 
 <section class="sections">
-  <div class="sections-card">
-    <h2>किताब की यात्रा</h2>
-    <div class="section-list">
-      <div class="section-item">
-        <div class="sec-num">1</div>
-        <div class="sec-info">
-          <h3>बंद कमरा</h3>
-          <p>जहाँ कोई दरवाज़ा नहीं खुलता</p>
-        </div>
-      </div>
-
-      <div class="section-item">
-        <div class="sec-num">2</div>
-        <div class="sec-info">
-          <h3>खुद से जंग</h3>
-          <p>जो कभी ख़त्म नहीं होती</p>
-        </div>
-      </div>
-
-      <div class="section-item">
-        <div class="sec-num">3</div>
-        <div class="sec-info">
-          <h3>ठहरा हुआ वक़्त</h3>
-          <p>न आगे, न पीछे — बस यहीं</p>
-        </div>
-      </div>
-
-      <div class="section-item">
-        <div class="sec-num">4</div>
-        <div class="sec-info">
-          <h3>टूटने से पहले</h3>
-          <p>जब सब कुछ ख़ामोश हो जाता है</p>
-        </div>
-      </div>
-
-      <div class="section-item">
-        <div class="sec-num">5</div>
-        <div class="sec-info">
-          <h3>एक रोशनदान</h3>
-          <p>जहाँ से थोड़ी सी रोशनी आती है</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="reviews">
-  <div class="reviews-card">
-    <h2>Readers' Reviews</h2>
-
-    <div class="review-form">
-      <input type="text" id="reviewName" placeholder="Your name">
-      <textarea id="reviewText" rows="4" placeholder="Write your review..."></textarea>
-      <button type="button" onclick="addReview()">Submit Review</button>
-    </div>
-
-    <div class="review-list" id="reviewList"></div>
-  </div>
+  <div class="section-item"><div class="sec-num">1</div>बंद कमरा</div>
+  <div class="section-item"><div class="sec-num">2</div>खुद से जंग</div>
+  <div class="section-item"><div class="sec-num">3</div>ठहरा हुआ वक़्त</div>
+  <div class="section-item"><div class="sec-num">4</div>टूटने से पहले</div>
+  <div class="section-item"><div class="sec-num">5</div>एक रोशनदान</div>
 </section>
 
 <footer>
-  <div class="ornament"><span>✦</span></div>
-  <p>लिखा और साझा किया <span class="gold">कवि कहता है</span> द्वारा</p>
-  <p>Free to Read · Free to Share · No Copyright</p>
+  <p>कवि कहता है</p>
 </footer>
-
-<script>
-  function loadReviews() {
-    const list = document.getElementById('reviewList');
-    const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-    list.innerHTML = '';
-
-    if (!reviews.length) {
-      list.innerHTML = '<div class="empty-state">अभी कोई review नहीं है. पहला review आप लिख सकते हैं.</div>';
-      return;
-    }
-
-    reviews.forEach(review => {
-      const item = document.createElement('div');
-      item.className = 'review-item';
-      item.innerHTML = `
-        <div class="review-top">
-          <div class="review-name">${escapeHtml(review.name)}</div>
-          <div class="review-date">${review.date || ''}</div>
-        </div>
-        <div class="review-text">${escapeHtml(review.text)}</div>
-      `;
-      list.appendChild(item);
-    });
-  }
-
-  function addReview() {
-    const nameEl = document.getElementById('reviewName');
-    const textEl = document.getElementById('reviewText');
-
-    const name = nameEl.value.trim();
-    const text = textEl.value.trim();
-
-    if (!name || !text) {
-      alert('Please enter your name and review.');
-      return;
-    }
-
-    const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-    const date = new Date().toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-
-    reviews.unshift({ name, text, date });
-    localStorage.setItem('reviews', JSON.stringify(reviews));
-
-    nameEl.value = '';
-    textEl.value = '';
-    loadReviews();
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#39;');
-  }
-
-  loadReviews();
-</script>
 
 </body>
 </html>
