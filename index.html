@@ -1,54 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Band Kamre Mein Ek Aadmi Rehta Hai</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://counterapi.dev/js/track.js" async></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>बंद कमरे में एक आदमी रहता है — कवि कहता है</title>
+<meta name="description" content="एक मुफ़्त हिंदी कविता संग्रह — कवि कहता है द्वारा। Free Hindi Poetry Book."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:   #0f0f1a; --bg2: #13132a;
+    --gold: #e2b96f; --gold2: #c8952a;
+    --white:#f0f0f0; --grey: #b0b0c8;
+    --dim:  #666688; --rule: #2a2a4a;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--white);
+    font-family: 'Noto Serif Devanagari', serif;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0; opacity:0.4;
+  }
+
+  /* ── TOP STATS BANNER ── */
+  .stats-banner {
+    position: relative; z-index: 10;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--rule);
+    padding: 11px 24px;
+    display: flex; justify-content: center;
+    align-items: center; gap: 28px; flex-wrap: wrap;
+  }
+  .stat-item { display:flex; align-items:center; gap:7px; }
+  .stat-icon { font-size:13px; }
+  .stat-label { font-size:10px; color:var(--dim); letter-spacing:0.1em; text-transform:uppercase; }
+  .stat-value { font-size:15px; font-weight:700; color:var(--gold); min-width:38px; display:inline-block; }
+  .stat-sep { width:1px; height:18px; background:var(--rule); }
+
+  @keyframes countPop {
+    0%   { transform:scale(1); }
+    40%  { transform:scale(1.2); color:#fff; }
+    100% { transform:scale(1); }
+  }
+  .pop { animation: countPop 0.35s ease; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:40px 24px 40px; position:relative; text-align:center;
+  }
+  .hero::after {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 60% at 50% 40%, rgba(200,149,42,0.07) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .cover-wrap {
+    position:relative; width:min(280px,72vw); margin-bottom:36px;
+    animation:floatUp 1s ease both;
+  }
+  .cover-wrap::before {
+    content:''; position:absolute; inset:-12px;
+    background:radial-gradient(ellipse at center, rgba(226,185,111,0.18) 0%, transparent 70%);
+    border-radius:4px; z-index:0;
+    animation:flicker 3s ease-in-out infinite;
+  }
+  .cover-img {
+    width:100%; display:block; border-radius:3px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.7),0 0 60px rgba(226,185,111,0.12),0 0 0 1px rgba(226,185,111,0.15);
+    position:relative; z-index:1;
+  }
+  .title-block { animation:floatUp 1s 0.15s ease both; }
+  .book-title {
+    font-size:clamp(22px,6vw,32px); font-weight:700;
+    color:var(--gold); line-height:1.4; margin-bottom:10px;
+  }
+  .ornament {
+    display:flex; align-items:center; justify-content:center;
+    gap:10px; margin:14px auto; opacity:0.6;
+  }
+  .ornament::before,.ornament::after { content:''; width:60px; height:1px; background:var(--gold); }
+  .ornament span { color:var(--gold); font-size:10px; }
+  .author { font-size:14px; color:var(--grey); letter-spacing:0.05em; margin-bottom:4px; }
+  .free-badge {
+    display:inline-block; margin-top:10px; padding:4px 14px;
+    border:1px solid rgba(226,185,111,0.3); border-radius:20px;
+    font-size:11px; color:var(--gold); letter-spacing:0.08em;
+  }
+  .buttons {
+    display:flex; flex-direction:column; gap:12px;
+    width:min(320px,90vw); margin-top:30px;
+    animation:floatUp 1s 0.3s ease both;
+  }
+  .btn {
+    display:block; padding:15px 24px; border-radius:3px;
+    font-family:'Noto Serif Devanagari',serif; font-size:15px; font-weight:600;
+    text-decoration:none; text-align:center; transition:all 0.25s ease;
+    cursor:pointer; border:none; letter-spacing:0.02em;
+  }
+  .btn-primary {
+    background:linear-gradient(135deg,#c8952a,#e2b96f,#c8952a);
+    background-size:200% 100%; color:#0f0f1a;
+  }
+  .btn-primary:hover { background-position:100% 0; transform:translateY(-2px); box-shadow:0 8px 24px rgba(226,185,111,0.3); }
+  .btn-secondary { background:transparent; border:1px solid rgba(226,185,111,0.4); color:var(--gold); }
+  .btn-secondary:hover { background:rgba(226,185,111,0.07); border-color:var(--gold); transform:translateY(-2px); }
+
+  /* ── LIVE STATS CARD ── */
+  .stats-section {
+    padding: 0 24px 52px;
+    max-width: 480px; margin: 0 auto;
+    animation: floatUp 1s 0.4s ease both;
+  }
+  .stats-card {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--bg2);
+    overflow: hidden;
+  }
+  .stats-card-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #4caf7d;
+    animation: blink 2s ease infinite;
+    flex-shrink: 0;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+  .stats-card-header span {
+    font-size: 11px; color: var(--dim);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+  }
+  .stat-cell {
+    padding: 22px 16px; text-align: center;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-big-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--gold); display: block;
+    line-height: 1; margin-bottom: 8px;
+    min-height: 36px;
+  }
+  .stat-big-label {
+    font-size: 10px; color: var(--dim);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .stats-card-footer {
+    padding: 10px 20px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 10px; color: var(--dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* shimmer loading */
+  .shimmer {
+    background: linear-gradient(90deg, var(--rule) 25%, #3a3a5a 50%, var(--rule) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    display: inline-block;
+    width: 44px; height: 30px;
+  }
+  @keyframes shimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+
+  /* ── Quote ── */
+  .quote-section { padding:60px 24px; max-width:480px; margin:0 auto; text-align:center; }
+  .quote { font-size:clamp(14px,3.8vw,17px); line-height:2; color:var(--grey); position:relative; }
+  .quote::before {
+    content:'"'; font-family:'Playfair Display',serif; font-size:80px;
+    color:var(--gold); opacity:0.15; position:absolute; top:-20px; left:-10px; line-height:1;
+  }
+  .quote-line { display:block; }
+  .quote-line.highlight { color:var(--white); font-weight:600; }
+
+  /* ── About ── */
+  .about {
+    background:var(--bg2); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    padding:48px 24px; text-align:center;
+  }
+  .about h2 { font-size:18px; color:var(--gold); margin-bottom:20px; font-weight:600; }
+  .about p { font-size:14px; line-height:2; color:var(--grey); max-width:400px; margin:0 auto 20px; }
+  .tags { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:16px; }
+  .tag { padding:5px 14px; border:1px solid var(--rule); border-radius:20px; font-size:11px; color:var(--dim); letter-spacing:0.05em; }
+
+  /* ── Sections ── */
+  .sections { padding:56px 24px; max-width:480px; margin:0 auto; }
+  .sections h2 { font-size:17px; color:var(--gold); text-align:center; margin-bottom:30px; }
+  .section-item { display:flex; align-items:flex-start; gap:16px; padding:18px 0; border-bottom:1px solid var(--rule); }
+  .section-item:last-child { border-bottom:none; }
+  .sec-num { font-family:'Playfair Display',serif; font-size:28px; color:rgba(226,185,111,0.2); line-height:1; min-width:36px; }
+  .sec-info h3 { font-size:15px; color:var(--white); margin-bottom:4px; }
+  .sec-info p  { font-size:12px; color:var(--dim); line-height:1.6; }
+
+  /* ── Footer ── */
+  footer { text-align:center; padding:40px 24px; border-top:1px solid var(--rule); }
+  footer p { font-size:12px; color:var(--dim); line-height:2; }
+  footer .gold { color:var(--gold); }
+
+  @keyframes floatUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes flicker { 0%,100%{opacity:1;} 50%{opacity:0.85;} }
+</style>
 </head>
 <body>
-    <div class="stats-banner">
-        <p>Live Stats: <span id="live-stats"></span></p>
+
+<!-- TOP STATS BANNER -->
+<div class="stats-banner">
+  <div class="stat-item">
+    <span class="stat-icon">👁</span>
+    <span class="stat-label">Views</span>
+    <span class="stat-value" id="b-views">—</span>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item">
+    <span class="stat-icon">📖</span>
+    <span class="stat-label">Reads</span>
+    <span class="stat-value" id="b-reads">—</span>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item">
+    <span class="stat-icon">⬇</span>
+    <span class="stat-label">Downloads</span>
+    <span class="stat-value" id="b-dl">—</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="cover-wrap">
+    <img src="cover.jpg" alt="बंद कमरे में एक आदमी रहता है" class="cover-img" onerror="this.style.display='none'"/>
+  </div>
+  <div class="title-block">
+    <h1 class="book-title">बंद कमरे में<br>एक आदमी रहता है</h1>
+    <div class="ornament"><span>✦</span></div>
+    <p class="author">कवि कहता है</p>
+    <span class="free-badge">FREE TO READ · बिल्कुल मुफ़्त</span>
+  </div>
+  <div class="buttons">
+    <a href="बंद कमरे में एक आदमी रहता है by कवि कहता है .pdf" target="_blank" class="btn btn-primary" onclick="trackRead()">
+      📖 अभी पढ़ें — Read Now
+    </a>
+    <a href="बंद कमरे में एक आदमी रहता है by कवि कहता है .pdf" download class="btn btn-secondary" onclick="trackDownload()">
+      ⬇ PDF Download करें
+    </a>
+  </div>
+</section>
+
+<!-- LIVE STATS CARD -->
+<div class="stats-section">
+  <div class="stats-card">
+    <div class="stats-card-header">
+      <div class="live-dot"></div>
+      <span>Live Count — किताब की पहुँच</span>
     </div>
-    <header class="hero-section">
-        <img src="cover.jpg" alt="Cover Image" class="cover-image">
-        <h1>Welcome to Our Project</h1>
-        <button class="cta-button">Get Started</button>
-    </header>
-    <main>
-        <div class="live-stats-card">
-            <script>
-                fetch('https://counterapi.dev/api/stats')
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('live-stats').innerText = `Views: ${data.views}, Reads: ${data.reads}, Downloads: ${data.downloads}`;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching stats:', error);
-                    });
-            </script>
-        </div>
-        <section class="quote-section">
-            <blockquote>
-                <p>“Your quote goes here.”</p>
-            </blockquote>
-        </section>
-        <section class="about-section">
-            <h2>About</h2>
-            <p>Details about your project.</p>
-        </section>
-        <section class="sections-list">
-            <h2>Sections</h2>
-            <ul>
-                <li>Section 1</li>
-                <li>Section 2</li>
-                <li>Section 3</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Band Kamre Mein Ek Aadmi Rehta Hai</p>
-    </footer>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <span class="stat-big-num" id="c-views"><span class="shimmer"></span></span>
+        <span class="stat-big-label">👁<br>Page Views</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-big-num" id="c-reads"><span class="shimmer"></span></span>
+        <span class="stat-big-label">📖<br>Times Read</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-big-num" id="c-dl"><span class="shimmer"></span></span>
+        <span class="stat-big-label">⬇<br>Downloads</span>
+      </div>
+    </div>
+    <div class="stats-card-footer">
+      हर visit, read और download यहाँ real-time में count होता है
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <p class="quote">
+    <span class="quote-line highlight">मैं बाहर से हँसता, भीतर से टूटा हूँ,</span>
+    <span class="quote-line">हर भीड़ में होकर भी अकेला छूटा हूँ,</span>
+    <span class="quote-line">जो देखते हैं वो समझते नहीं कुछ भी —</span>
+    <span class="quote-line highlight">मैं खुद अपनी नज़रों में झूठा हूँ।</span>
+  </p>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2>इस किताब के बारे में</h2>
+  <p>यह कविता संग्रह उन सभी के लिए है जो बंद कमरे में रहते हैं और बाहर से ठीक दिखते हैं। १९ कविताएँ — जो वो बातें कहती हैं जो हम कह नहीं पाते।</p>
+  <p>यह किताब बिकती नहीं — बस उन तक पहुँचती है जिन्हें इन शब्दों की ज़रूरत है।</p>
+  <div class="tags">
+    <span class="tag">#हिंदीकविता</span><span class="tag">#Poetry</span>
+    <span class="tag">#Free Book</span><span class="tag">#Emotions</span>
+    <span class="tag">#कवि कहता है</span>
+  </div>
+</section>
+
+<!-- SECTIONS -->
+<section class="sections">
+  <h2>किताब की यात्रा</h2>
+  <div class="section-item">
+    <div class="sec-num">१</div>
+    <div class="sec-info"><h3>बंद कमरा</h3><p>जहाँ कोई दरवाज़ा नहीं खुलता</p></div>
+  </div>
+  <div class="section-item">
+    <div class="sec-num">२</div>
+    <div class="sec-info"><h3>खुद से जंग</h3><p>जो कभी ख़त्म नहीं होती</p></div>
+  </div>
+  <div class="section-item">
+    <div class="sec-num">३</div>
+    <div class="sec-info"><h3>ठहरा हुआ वक़्त</h3><p>न आगे, न पीछे — बस यहीं</p></div>
+  </div>
+  <div class="section-item">
+    <div class="sec-num">४</div>
+    <div class="sec-info"><h3>टूटने से पहले</h3><p>जब सब कुछ ख़ामोश हो जाता है</p></div>
+  </div>
+  <div class="section-item">
+    <div class="sec-num">५</div>
+    <div class="sec-info"><h3>एक रोशनदान</h3><p>जहाँ से थोड़ी सी रोशनी आती है</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ornament"><span>✦</span></div>
+  <p>लिखा और साझा किया <span class="gold">कवि कहता है</span> द्वारा</p>
+  <p>Free to Read · Free to Share · No Copyright</p>
+</footer>
+
+<script>
+// ── CountAPI (free, no signup, permanent) ────────────────────────────────────
+// Each key tracks a different action. Namespace is unique to your book.
+// ── counterapi.dev — free replacement for countapi.xyz (which shut down) ────
+// Namespace = your GitHub username + repo (unique to you, never clashes)
+const NS  = 'kavi-kehta-hai';           // your GitHub username
+const REPO = 'Band-kamre-mein-ek-aadmi-rehta-hai'; // your repo name
+const API = 'https://api.counterapi.dev/v1';
+
+// Keys — one per action
+const KEY_VIEWS = `${REPO}-views`;
+const KEY_READS = `${REPO}-reads`;
+const KEY_DL    = `${REPO}-downloads`;
+
+function fmt(n) {
+  if (n == null || isNaN(n)) return '0';
+  if (n >= 1000000) return (n/1000000).toFixed(1)+'M';
+  if (n >= 1000)    return (n/1000).toFixed(1)+'K';
+  return n.toString();
+}
+
+function setVal(ids, val) {
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = fmt(val);
+    el.classList.remove('pop');
+    void el.offsetWidth;
+    el.classList.add('pop');
+  });
+}
+
+// counterapi.dev endpoints:
+// UP  (increment): GET /v1/{namespace}/{key}/up  → { count: N }
+// GET (read only): GET /v1/{namespace}/{key}/get → { count: N }
+
+async function initCounts() {
+  try {
+    const [vr, rr, dr] = await Promise.all([
+      fetch(`${API}/${NS}/${KEY_VIEWS}/up`).then(r=>r.json()),
+      fetch(`${API}/${NS}/${KEY_READS}/get`).then(r=>r.json()).catch(()=>({count:0})),
+      fetch(`${API}/${NS}/${KEY_DL}/get`).then(r=>r.json()).catch(()=>({count:0})),
+    ]);
+    setVal(['b-views','c-views'], vr.count ?? 0);
+    setVal(['b-reads','c-reads'], rr.count ?? 0);
+    setVal(['b-dl',   'c-dl'],   dr.count ?? 0);
+  } catch(e) {
+    ['b-views','c-views','b-reads','c-reads','b-dl','c-dl']
+      .forEach(id => { const el=document.getElementById(id); if(el) el.textContent='0'; });
+  }
+}
+
+async function trackRead() {
+  try {
+    const r = await fetch(`${API}/${NS}/${KEY_READS}/up`).then(r=>r.json());
+    setVal(['b-reads','c-reads'], r.count ?? 0);
+  } catch(e) {}
+}
+
+async function trackDownload() {
+  try {
+    const r = await fetch(`${API}/${NS}/${KEY_DL}/up`).then(r=>r.json());
+    setVal(['b-dl','c-dl'], r.count ?? 0);
+  } catch(e) {}
+}
+
+initCounts();
+</script>
 </body>
 </html>
