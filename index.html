@@ -283,6 +283,7 @@
       </div>
     </div>
     <div class="stats-card-footer">
+      हर visit, read और download यहाँ real-time में count होता है
     </div>
   </div>
 </div>
@@ -344,8 +345,16 @@
 <script>
 // ── CountAPI (free, no signup, permanent) ────────────────────────────────────
 // Each key tracks a different action. Namespace is unique to your book.
-const NS = 'kavikahatahai-bandkamra';
-const API = 'https://api.countapi.xyz';
+// ── counterapi.dev — free replacement for countapi.xyz (which shut down) ────
+// Namespace = your GitHub username + repo (unique to you, never clashes)
+const NS  = 'kavi-kehta-hai';           // your GitHub username
+const REPO = 'Band-kamre-mein-ek-aadmi-rehta-hai'; // your repo name
+const API = 'https://api.counterapi.dev/v1';
+
+// Keys — one per action
+const KEY_VIEWS = `${REPO}-views`;
+const KEY_READS = `${REPO}-reads`;
+const KEY_DL    = `${REPO}-downloads`;
 
 function fmt(n) {
   if (n == null || isNaN(n)) return '0';
@@ -360,41 +369,42 @@ function setVal(ids, val) {
     if (!el) return;
     el.textContent = fmt(val);
     el.classList.remove('pop');
-    void el.offsetWidth; // reflow for animation restart
+    void el.offsetWidth;
     el.classList.add('pop');
   });
 }
 
-// On load — increment views, fetch reads & downloads silently
+// counterapi.dev endpoints:
+// UP  (increment): GET /v1/{namespace}/{key}/up  → { count: N }
+// GET (read only): GET /v1/{namespace}/{key}/get → { count: N }
+
 async function initCounts() {
   try {
     const [vr, rr, dr] = await Promise.all([
-      fetch(`${API}/hit/${NS}/views`).then(r=>r.json()),
-      fetch(`${API}/get/${NS}/reads`).then(r=>r.json()).catch(()=>({value:0})),
-      fetch(`${API}/get/${NS}/downloads`).then(r=>r.json()).catch(()=>({value:0})),
+      fetch(`${API}/${NS}/${KEY_VIEWS}/up`).then(r=>r.json()),
+      fetch(`${API}/${NS}/${KEY_READS}/get`).then(r=>r.json()).catch(()=>({count:0})),
+      fetch(`${API}/${NS}/${KEY_DL}/get`).then(r=>r.json()).catch(()=>({count:0})),
     ]);
-    setVal(['b-views','c-views'], vr.value ?? 0);
-    setVal(['b-reads','c-reads'], rr.value ?? 0);
-    setVal(['b-dl',   'c-dl'],   dr.value ?? 0);
+    setVal(['b-views','c-views'], vr.count ?? 0);
+    setVal(['b-reads','c-reads'], rr.count ?? 0);
+    setVal(['b-dl',   'c-dl'],   dr.count ?? 0);
   } catch(e) {
     ['b-views','c-views','b-reads','c-reads','b-dl','c-dl']
-      .forEach(id => { const el=document.getElementById(id); if(el) el.textContent='—'; });
+      .forEach(id => { const el=document.getElementById(id); if(el) el.textContent='0'; });
   }
 }
 
-// Read button clicked
 async function trackRead() {
   try {
-    const r = await fetch(`${API}/hit/${NS}/reads`).then(r=>r.json());
-    setVal(['b-reads','c-reads'], r.value ?? 0);
+    const r = await fetch(`${API}/${NS}/${KEY_READS}/up`).then(r=>r.json());
+    setVal(['b-reads','c-reads'], r.count ?? 0);
   } catch(e) {}
 }
 
-// Download button clicked
 async function trackDownload() {
   try {
-    const r = await fetch(`${API}/hit/${NS}/downloads`).then(r=>r.json());
-    setVal(['b-dl','c-dl'], r.value ?? 0);
+    const r = await fetch(`${API}/${NS}/${KEY_DL}/up`).then(r=>r.json());
+    setVal(['b-dl','c-dl'], r.count ?? 0);
   } catch(e) {}
 }
 
