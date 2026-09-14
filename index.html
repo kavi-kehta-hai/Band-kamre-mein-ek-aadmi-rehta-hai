@@ -195,23 +195,24 @@
   // ==========================================
   // SECURE PUBLIC COUNTER API
   // ==========================================
-  // We use counterapi.com, a free service that stores counts publicly.
-  // This requires NO passwords or tokens, keeping your GitHub account 100% safe!
+  // We use Abacus, a free service that stores counts publicly.
+  // This requires NO passwords or tokens, keeping everything 100% safe!
 
-  const API_BASE = "https://counterapi.com/api/kavi-kehta-hai";
+  const API_BASE = "https://abacus.jasoncameron.dev";
+  const NAMESPACE = "kavi-kehta-hai";
   const READ_KEY = "band_kamre_mein_read";
   const DOWNLOAD_KEY = "band_kamre_mein_download";
 
   async function fetchInitialCounts() {
     try {
-      // ?readOnly=true ensures we only read the count without increasing it on page load
-      let readRes = await fetch(`${API_BASE}/view/${READ_KEY}?readOnly=true`);
+      // /get/ reads the count without increasing it
+      let readRes = await fetch(`${API_BASE}/get/${NAMESPACE}/${READ_KEY}`);
       if (readRes.ok) {
         let data = await readRes.json();
         document.getElementById('read-count').innerText = data.value || 0;
       }
       
-      let downRes = await fetch(`${API_BASE}/view/${DOWNLOAD_KEY}?readOnly=true`);
+      let downRes = await fetch(`${API_BASE}/get/${NAMESPACE}/${DOWNLOAD_KEY}`);
       if (downRes.ok) {
         let data = await downRes.json();
         document.getElementById('download-count').innerText = data.value || 0;
@@ -222,16 +223,16 @@
   }
 
   function incrementCount(type) {
-    let endpoint = "";
+    let key = "";
     if (type === 'read') {
-      endpoint = `${API_BASE}/view/${READ_KEY}`;
+      key = READ_KEY;
     } else if (type === 'download') {
-      endpoint = `${API_BASE}/view/${DOWNLOAD_KEY}`;
+      key = DOWNLOAD_KEY;
     }
 
-    if (endpoint) {
-      // Fetching without readOnly=true increments the counter securely
-      fetch(endpoint)
+    if (key) {
+      // /hit/ increments the counter securely
+      fetch(`${API_BASE}/hit/${NAMESPACE}/${key}`)
         .then(res => res.json())
         .then(data => {
           if (type === 'read') {
