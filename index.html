@@ -192,25 +192,59 @@
 </footer>
 
 <script>
-  function updateCounters() {
-    let readCount = localStorage.getItem('readCount') || 0;
-    let downloadCount = localStorage.getItem('downloadCount') || 0;
-    document.getElementById('read-count').innerText = readCount;
-    document.getElementById('download-count').innerText = downloadCount;
+  // ==========================================
+  // SECURE PUBLIC COUNTER API
+  // ==========================================
+  // We use counterapi.com, a free service that stores counts publicly.
+  // This requires NO passwords or tokens, keeping your GitHub account 100% safe!
+
+  const API_BASE = "https://counterapi.com/api/kavi-kehta-hai";
+  const READ_KEY = "band_kamre_mein_read";
+  const DOWNLOAD_KEY = "band_kamre_mein_download";
+
+  async function fetchInitialCounts() {
+    try {
+      // ?readOnly=true ensures we only read the count without increasing it on page load
+      let readRes = await fetch(`${API_BASE}/view/${READ_KEY}?readOnly=true`);
+      if (readRes.ok) {
+        let data = await readRes.json();
+        document.getElementById('read-count').innerText = data.value || 0;
+      }
+      
+      let downRes = await fetch(`${API_BASE}/view/${DOWNLOAD_KEY}?readOnly=true`);
+      if (downRes.ok) {
+        let data = await downRes.json();
+        document.getElementById('download-count').innerText = data.value || 0;
+      }
+    } catch (error) {
+      console.error("Error fetching counters:", error);
+    }
   }
 
   function incrementCount(type) {
+    let endpoint = "";
     if (type === 'read') {
-      let count = parseInt(localStorage.getItem('readCount') || 0);
-      localStorage.setItem('readCount', count + 1);
+      endpoint = `${API_BASE}/view/${READ_KEY}`;
     } else if (type === 'download') {
-      let count = parseInt(localStorage.getItem('downloadCount') || 0);
-      localStorage.setItem('downloadCount', count + 1);
+      endpoint = `${API_BASE}/view/${DOWNLOAD_KEY}`;
     }
-    updateCounters();
+
+    if (endpoint) {
+      // Fetching without readOnly=true increments the counter securely
+      fetch(endpoint)
+        .then(res => res.json())
+        .then(data => {
+          if (type === 'read') {
+             document.getElementById('read-count').innerText = data.value;
+          } else {
+             document.getElementById('download-count').innerText = data.value;
+          }
+        })
+        .catch(err => console.error("Error updating count:", err));
+    }
   }
 
-  window.onload = updateCounters;
+  window.onload = fetchInitialCounts;
 </script>
 
 </body>
